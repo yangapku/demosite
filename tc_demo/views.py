@@ -6,7 +6,8 @@ ResultPath='D:\\demosite\\tc_demo\\rawdata\\resultfile\\'
 # Create your views here.
 def index(request):
 	return render(request,'tc_demo/index.html',{
-		'input_word':'Powered by Bootstrap and Django'
+		'input_word':'Powered by Bootstrap and Django',
+		'demo_count':'100'
 	})
 
 def getfile(request):
