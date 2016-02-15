@@ -35,7 +35,20 @@
 					$.get('getresult/',{
 						'id':activeid
 					}).done(function(data){
-						$('#result_area').text(data);
+						var json_result=JSON.parse(data);
+						var result_info="";
+						for(var i=0;i<json_result.sub_topic.length;i++){
+							result_info+="段落"+(i+1);
+							if(json_result.sub_topic[i].t_abstract!=undefined){
+								result_info+="&nbsp;&nbsp;&nbsp;&nbsp;摘要："+json_result.sub_topic[i].t_abstract;
+							}
+							result_info+="<br /><br />";
+							result_info+=rawtext.slice(json_result.sub_topic[i].p_b,json_result.sub_topic[i].p_e+1).join("<br />");
+							if((i+1)!=json_result.sub_topic.length){
+								result_info+="<br /><br />====================<br /><br />";							
+							}
+						}
+						$('#result_area').html(result_info);
 					}).fail(function(){
 						$('#result_area').text('获取结果失败，请重试！');
 					});
