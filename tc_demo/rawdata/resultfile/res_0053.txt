@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":0,"t_abstract":"基金概况。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":1,"p_e":3,"t_abstract":"基金经理情况简介。","sub_title":[{"st_id":0,"st_p_id":1,"st_b":0,"st_e":12}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"0"},{"t_id":1,"t_rel":"0"}],"sub_rel":"3","sub_type":"2"}

@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":0,"t_abstract":"三星官方对安卓设备的升级原则是最长两年或者最多两次重大更新。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":1,"p_e":2,"t_abstract":"三星在其芬兰官网上确认，上上代的大屏旗舰Galaxy Note 2也能够升级android5.0系统，Galaxy S3则被排除在外。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"0"},{"t_id":1,"t_rel":"0"}],"sub_rel":"3","sub_type":"2"}

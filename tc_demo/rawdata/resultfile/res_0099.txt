@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":0,"t_abstract":"夏尔的秘密是以灵魂为代价与塞巴斯签立了保护他和达成夏尔一切愿望的契约","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":1,"p_e":3,"t_abstract":"这个契约是如何签订的以及契约的内容。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"1"},{"t_id":1,"t_rel":"2"}],"sub_rel":"1","sub_type":"2"}

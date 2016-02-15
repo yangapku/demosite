@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":9,"t_abstract":"作者买东西不擅长讲价的经历。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"0"},{"t_id":1,"t_rel":"0"}],"sub_rel":"2","sub_type":"2"}

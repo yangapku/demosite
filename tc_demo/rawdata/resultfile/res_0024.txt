@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":0,"t_abstract":"俄罗斯海军与中国人民解放军海军各类军舰将参加“海上合作-2015”演习引热评。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":1,"p_e":"9","t_abstract":"西方密切关注中俄在地中海的军演。","sub_title":[{"st_id":0,"st_p_id":1,"st_b":0,"st_e":33}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"1"},{"t_id":1,"t_rel":"2"}],"sub_rel":"1","sub_type":"2"}

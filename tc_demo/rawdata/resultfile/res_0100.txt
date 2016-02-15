@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":1,"t_abstract":"由黄晓明、杨幂、佟大为、angelababy等主演的电影《何以笙箫默》目前正在各大影院热播。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":2,"p_e":2,"t_abstract":"这部电影的票房情况。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"0"},{"t_id":1,"t_rel":"0"}],"sub_rel":"3","sub_type":"2"}

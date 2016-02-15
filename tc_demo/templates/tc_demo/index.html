@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<title>主题划分在线演示</title>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="{% static 'tc_demo/js/jquery-1.11.3.min.js' %}"></script>
+        <script src="{% static 'tc_demo/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'tc_demo/js/jquery-ui.min.js' %}"></script>
+        <link href="{% static 'tc_demo/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'tc_demo/css/jquery-ui.min.css' %}" rel="stylesheet">
+        <link href="{% static 'tc_demo/css/jquery-ui.structure.min.css' %}" rel="stylesheet">
+        <link href="{% static 'tc_demo/css/jquery-ui.theme.min.css' %}" rel="stylesheet">
+		<script>
+			var activeid='0001';
+			$(function(){
+				$('#result_display_part').hide();
+			})
+			$(function(){
+				$('#update_file').click(function(){
+					activeid=$('#select_file>option:selected').val();
+					$.get('getfile/',{
+						'id':activeid
+					}).done(function(data){
+						$('#text_area').text(data);
+					}).fail(function(){
+						$('#text_area').text('读取已有文件失败，请重试！');
+					});
+				});
+			});
+			$(function(){
+				$('#update_result').click(function(){
+					var rawtext=$('#text_area').val().split('\n');
+					$.get('getresult/',{
+						'id':activeid
+					}).done(function(data){
+						$('#result_area').text(data);
+					}).fail(function(){
+						$('#result_area').text('获取结果失败，请重试！');
+					});
+					$('#result_display_part').show();
+					window.location.href="#result_area";
+				});
+			});
+			$(function(){
+				$('#json_parser').click(function(){
+					var jsontext=$('#text_area').val();
+					var jsonobj=JSON.parse(jsontext);
+					var rawtext="";
+					for(var i=0;i<jsonobj.doc.length;i++){
+						for(var j=0;j<jsonobj.doc[i].length;j++){
+							rawtext=rawtext+jsonobj.doc[i][j].cont;
+							if(!(i===jsonobj.doc.length-1&&j===jsonobj.doc[i].length-1)){
+								rawtext=rawtext+'\n';
+							}
+						}
+					}
+					$('#text_area').text(rawtext);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">NLP演示平台</a><!-- to be achieved -->
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="#">首页</a></li><!-- to be achieved -->
+						<li class="active"><a href="#">主题划分</a></li>
+						<li><a href="#">联系我们</a></li><!-- to be achieved -->
+					</ul>
+				</div>
+			</div>
+		</nav><br/><br/><br/>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>主题划分演示</h1>
+					<hr/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-10"><!--main display area-->
+					<div id="introduction_part" class="row well">
+						<h4>使用说明</h4>
+						<ol>
+							<li>请您在下方文本框内输入待划分文本，您也可以载入示例文件或上传本地文件</li>
+							<li>本系统支持纯文本或JSON文本，JSON文本请在提交前先使用<code>JSON解析</code>按钮转换为纯文本</li>
+						</ol>
+					</div><!--First row: readme-->
+					<div id="input_text_part" class="row well">
+						<form id="input_text">
+							<div class="row">
+								<div class="col-md-12">
+									<h4>输入文本</h4>
+									<p>
+										<textarea id="text_area" class="form-control" cols=130 rows=8 placeholder="请您输入文本或载入文件"></textarea>
+									</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<h5 style="font-size:15px;">
+										<center>载入示例文件</center>
+									</h5>
+								</div>
+								<div class="col-md-2">
+									<select id="select_file" class="form-control" name="file_index">
+										<option value="0001" selected>0001.json
+										<option value="0002">0002.json
+									</select>
+								</div>
+								<div class="col-md-1">
+									<button type="button" id="update_file" class="btn btn-success">载入</button>
+								</div>
+								<div class="col-md-2">
+									<h5 style="font-size:15px;">
+										<center>上传本地文件</center>
+									</h5>
+								</div>
+								<div class="col-md-4">
+									<input type="file" class="form-control" id="input_file">
+								</div>
+								<div class="col-md-1">
+									<button type="button" class="btn btn-success">上传</button><!-- to be achieved -->
+								</div>
+							</div><br/>
+							<div class="row">
+								<div class="col-md-8">
+								</div>
+								<div class="col-md-2">
+									<button type="button" id="json_parser" class="btn btn-success">JSON解析</button>
+								</div>
+								<div class="col-md-1">
+									<button id="update_result" type="button" class="btn btn-success">提交</button>
+								</div>
+							</div>
+						</form>
+					</div><!--Second row: input text-->
+					<div id="result_display_part" class="row well">
+						<h4>划分结果</h4>
+						<div class="panel panel-default">
+							<div class="panel-body" id="result_area">
+							</div>
+						</div>
+					</div><!--Third row: display result-->
+				</div><!--main display area ended-->
+				<div class="col-md-1">
+				</div>
+			</div><hr/>
+			<div class="row">
+				<center><p>{{ input_word }}</p></center>
+			</div>
+		</div>
+	</body>
+</html>

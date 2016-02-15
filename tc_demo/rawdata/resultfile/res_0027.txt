@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":0,"t_abstract":"目前全球绝大多数市场上销售的Galaxy Note2均已升级到安卓4.4.2，唯独中国市场上的N7100等机型还始终停留在安卓4.3。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":1,"p_e":4,"t_abstract":"芬兰三星官方确认Galaxy Note2有望获得安卓5.0的更新，但中国用户享受此服务仍是遥遥无期。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"1"},{"t_id":1,"t_rel":"2"}],"sub_rel":"1","sub_type":"2"}

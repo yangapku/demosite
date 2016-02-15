@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":2,"t_abstract":"西安小寨天桥上出现7名穿着清凉手牵大白菜的女子。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":3,"p_e":4,"t_abstract":"围观者对这一行为艺术的评价。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"0"},{"t_id":1,"t_rel":"0"}],"sub_rel":"3","sub_type":"2"}

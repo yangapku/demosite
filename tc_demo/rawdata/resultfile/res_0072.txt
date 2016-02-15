@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":0,"t_abstract":"导读。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":1,"p_e":5,"t_abstract":"毛人凤和郑介民在军统任职说明。","sub_title":[{"st_id":0}]},{"t_id":2,"p_b":6,"p_e":7,"t_abstract":"毛人凤和郑介民在保密局的任职交接。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"0"},{"t_id":1,"t_rel":"0"},{"t_id":2,"t_rel":"0"}],"sub_rel":"3","sub_type":"2"}

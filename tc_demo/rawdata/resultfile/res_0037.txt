@@ -1,0 +1,1 @@
+{"sub_topic":[{"t_id":0,"p_b":0,"p_e":3,"t_abstract":"特鲁姆普天赋明显，媲美奥沙利文。","sub_title":[{"st_id":0}]},{"t_id":1,"p_b":4,"p_e":7,"t_abstract":"特鲁姆上赛季陷入低潮，现蓄势待发准备逆转。","sub_title":[{"st_id":0}]}],"sub_topic_rel":[{"t_id":0,"t_rel":"0"},{"t_id":1,"t_rel":"0"}],"sub_rel":"3","sub_type":"2"}
