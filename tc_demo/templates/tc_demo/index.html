@@ -22,8 +22,18 @@
 					activeid=$('#select_file>option:selected').val();
 					$.get('getfile/',{
 						'id':activeid
-					}).done(function(data){
-						$('#text_area').text(data);
+					}).done(function(jsontext){
+						var jsonobj=JSON.parse(jsontext);
+						var rawtext="";
+						for(var i=0;i<jsonobj.doc.length;i++){
+							for(var j=0;j<jsonobj.doc[i].length;j++){
+								rawtext=rawtext+jsonobj.doc[i][j].cont;
+								if(!(i===jsonobj.doc.length-1&&j===jsonobj.doc[i].length-1)){
+									rawtext=rawtext+'\n';
+								}
+							}
+						}
+						$('#text_area').text(rawtext);
 					}).fail(function(){
 						$('#text_area').text('读取已有文件失败，请重试！');
 					});
@@ -54,22 +64,6 @@
 					});
 					$('#result_display_part').show();
 					window.location.href="#result_area";
-				});
-			});
-			$(function(){
-				$('#json_parser').click(function(){
-					var jsontext=$('#text_area').val();
-					var jsonobj=JSON.parse(jsontext);
-					var rawtext="";
-					for(var i=0;i<jsonobj.doc.length;i++){
-						for(var j=0;j<jsonobj.doc[i].length;j++){
-							rawtext=rawtext+jsonobj.doc[i][j].cont;
-							if(!(i===jsonobj.doc.length-1&&j===jsonobj.doc[i].length-1)){
-								rawtext=rawtext+'\n';
-							}
-						}
-					}
-					$('#text_area').text(rawtext);
 				});
 			});
 		</script>
@@ -134,7 +128,7 @@
 												if(i===1){
 													optionline+=" selected";
 												}
-												optionline+=">"+pad(i)+".json\n";
+												optionline+=">"+pad(i)+".txt\n";
 												document.write(optionline);
 											}
 										</script>
@@ -159,7 +153,6 @@
 								<div class="col-md-8">
 								</div>
 								<div class="col-md-2">
-									<button type="button" id="json_parser" class="btn btn-success">JSON解析</button>
 								</div>
 								<div class="col-md-1">
 									<button id="update_result" type="button" class="btn btn-success">提交</button>
