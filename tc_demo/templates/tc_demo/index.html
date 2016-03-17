@@ -13,32 +13,10 @@
         <link href="{% static 'tc_demo/css/jquery-ui.structure.min.css' %}" rel="stylesheet">
         <link href="{% static 'tc_demo/css/jquery-ui.theme.min.css' %}" rel="stylesheet">
 		<script>
-			var activeid='0001';
+			var activeid='0000';
 			$(function(){
 				$('#result_display_part').hide();
 			})
-			$(function(){
-				$('#update_file').click(function(){
-					activeid=$('#select_file>option:selected').val();
-					$.get('getfile/',{
-						'id':activeid
-					}).done(function(jsontext){
-						var jsonobj=JSON.parse(jsontext);
-						var rawtext="";
-						for(var i=0;i<jsonobj.doc.length;i++){
-							for(var j=0;j<jsonobj.doc[i].length;j++){
-								rawtext=rawtext+jsonobj.doc[i][j].cont;
-								if(!(i===jsonobj.doc.length-1&&j===jsonobj.doc[i].length-1)){
-									rawtext=rawtext+'\n';
-								}
-							}
-						}
-						$('#text_area').text(rawtext);
-					}).fail(function(){
-						$('#text_area').text('读取已有文件失败，请重试！');
-					});
-				});
-			});
 			$(function(){
 				$('#update_result').click(function(){
 					var rawtext=$('#text_area').val().split('\n');
@@ -66,6 +44,32 @@
 					window.location.href="#result_area";
 				});
 			});
+			$(function(){
+				$('#select_file').change(function(){
+					activeid=$('#select_file>option:selected').val();
+					if(activeid==="0000"){
+						$('#text_area').text("");
+						return;
+					}
+					$.get('getfile/',{
+						'id':activeid
+					}).done(function(jsontext){
+						var jsonobj=JSON.parse(jsontext);
+						var rawtext="";
+						for(var i=0;i<jsonobj.doc.length;i++){
+							for(var j=0;j<jsonobj.doc[i].length;j++){
+								rawtext=rawtext+jsonobj.doc[i][j].cont;
+								if(!(i===jsonobj.doc.length-1&&j===jsonobj.doc[i].length-1)){
+									rawtext=rawtext+'\n';
+								}
+							}
+						}
+						$('#text_area').text(rawtext);
+					}).fail(function(){
+						$('#text_area').text('读取已有文件失败，请重试！');
+					});				
+				})
+			})	
 		</script>
 	</head>
 	<body>
@@ -119,23 +123,20 @@
 								</div>
 								<div class="col-md-2">
 									<select id="select_file" class="form-control" name="file_index">
+										<option value="0000" selected>请选择</option>
 										<script>
 											function pad(num) {
 												return Array(4-(''+num).length+1).join(0)+num; 
 											}
 											for(var i=1;i<=parseInt({{ demo_count }});i++){
-												var optionline="<option value=\""+pad(i)+"\"";
-												if(i===1){
-													optionline+=" selected";
-												}
-												optionline+=">"+pad(i)+".txt\n";
+												var optionline="<option value=\""+pad(i)+"\""+" id=\"choice_"+pad(i)+"\"";
+												optionline+=">"+pad(i)+".txt</option>\n";
 												document.write(optionline);
 											}
 										</script>
 									</select>
 								</div>
 								<div class="col-md-1">
-									<button type="button" id="update_file" class="btn btn-success">载入</button>
 								</div>
 								<div class="col-md-2">
 									<h5 style="font-size:15px;">
@@ -146,7 +147,6 @@
 									<input type="file" class="form-control" id="input_file">
 								</div>
 								<div class="col-md-1">
-									<button type="button" class="btn btn-success">上传</button><!-- to be achieved -->
 								</div>
 							</div><br/>
 							<div class="row">
