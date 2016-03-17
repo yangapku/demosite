@@ -13,12 +13,33 @@
         <link href="{% static 'tc_demo/css/jquery-ui.structure.min.css' %}" rel="stylesheet">
         <link href="{% static 'tc_demo/css/jquery-ui.theme.min.css' %}" rel="stylesheet">
 		<script>
-			var activeid='0000';
+			var activeid='0001';
 			$(function(){
 				$('#result_display_part').hide();
+				$.get('getfile/',{
+					'id':activeid
+				}).done(function(jsontext){
+					var jsonobj=JSON.parse(jsontext);
+					var rawtext="";
+					for(var i=0;i<jsonobj.doc.length;i++){
+						for(var j=0;j<jsonobj.doc[i].length;j++){
+							rawtext=rawtext+jsonobj.doc[i][j].cont;
+							if(!(i===jsonobj.doc.length-1&&j===jsonobj.doc[i].length-1)){
+								rawtext=rawtext+'\n';
+							}
+						}
+					}
+					$('#text_area').val(rawtext);
+				}).fail(function(){
+					$('#text_area').val('读取已有文件失败，请重试！');
+				});				
 			})
 			$(function(){
 				$('#update_result').click(function(){
+					if($('#text_area').val()===""){
+						alert("输入文本不能为空");
+						return;
+					}
 					var rawtext=$('#text_area').val().split('\n');
 					$.get('getresult/',{
 						'id':activeid
@@ -47,10 +68,6 @@
 			$(function(){
 				$('#select_file').change(function(){
 					activeid=$('#select_file>option:selected').val();
-					if(activeid==="0000"){
-						$('#text_area').val("");
-						return;
-					}
 					$.get('getfile/',{
 						'id':activeid
 					}).done(function(jsontext){
@@ -100,10 +117,8 @@
 				<div class="col-md-10"><!--main display area-->
 					<div id="introduction_part" class="row well">
 						<h4>使用说明</h4>
-						<ol>
-							<li>请您在下方文本框内输入待划分文本，您也可以载入示例文件或上传本地文件</li>
-							<li>本系统支持纯文本或JSON文本，JSON文本请在提交前先使用<code>JSON解析</code>按钮转换为纯文本</li>
-						</ol>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						请您在下方文本框内输入待划分文本，您也可以载入示例文件或上传本地文件，完成后点击<code>提交</code>查看结果
 					</div><!--First row: readme-->
 					<div id="input_text_part" class="row well">
 						<form id="input_text">
@@ -111,7 +126,7 @@
 								<div class="col-md-12">
 									<h4>输入文本</h4>
 									<p>
-										<textarea id="text_area" class="form-control" cols=130 rows=8 placeholder="请您输入文本或载入文件"></textarea>
+										<textarea id="text_area" class="form-control" cols=130 rows=11 placeholder="请您输入文本或载入文件"></textarea>
 									</p>
 								</div>
 							</div>
@@ -123,13 +138,15 @@
 								</div>
 								<div class="col-md-2">
 									<select id="select_file" class="form-control" name="file_index">
-										<option value="0000" selected>请选择</option>
 										<script>
 											function pad(num) {
 												return Array(4-(''+num).length+1).join(0)+num; 
 											}
 											for(var i=1;i<=parseInt({{ demo_count }});i++){
 												var optionline="<option value=\""+pad(i)+"\""+" id=\"choice_"+pad(i)+"\"";
+												if(i===1){
+													optionline+=" selected";
+												}
 												optionline+=">"+pad(i)+".txt</option>\n";
 												document.write(optionline);
 											}
