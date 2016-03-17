@@ -48,7 +48,7 @@
 				$('#select_file').change(function(){
 					activeid=$('#select_file>option:selected').val();
 					if(activeid==="0000"){
-						$('#text_area').text("");
+						$('#text_area').val("");
 						return;
 					}
 					$.get('getfile/',{
@@ -64,9 +64,9 @@
 								}
 							}
 						}
-						$('#text_area').text(rawtext);
+						$('#text_area').val(rawtext);
 					}).fail(function(){
-						$('#text_area').text('读取已有文件失败，请重试！');
+						$('#text_area').val('读取已有文件失败，请重试！');
 					});				
 				})
 			})	
